@@ -13,15 +13,15 @@
 }
 
 [data-theme="dark"] {
-  --bg: #09111f;
-  --surface: #111827;
-  --surface-soft: #172033;
+  --bg: #030712;
+  --surface: #0b1220;
+  --surface-soft: #111a2e;
   --text: #f8fafc;
-  --muted: #aab7c8;
-  --line: #293548;
-  --primary: #2dd4bf;
-  --primary-dark: #14b8a6;
-  --accent: #fbbf24;
+  --muted: #b6c2d1;
+  --line: #26324a;
+  --primary: #8dd8ff;
+  --primary-dark: #38bdf8;
+  --accent: #f6c453;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
 }
 
@@ -37,10 +37,27 @@ html {
 
 body {
   min-height: 100vh;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 26%),
+    radial-gradient(circle at 86% 8%, rgba(246, 196, 83, 0.12), transparent 24%),
+    linear-gradient(135deg, var(--bg) 0%, #08111f 52%, #02040a 100%);
   color: var(--text);
   font-family: "Inter", Arial, sans-serif;
   line-height: 1.6;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.72) 0 1px, transparent 1px),
+    radial-gradient(circle, rgba(141, 216, 255, 0.42) 0 1px, transparent 1px);
+  background-position: 0 0, 28px 42px;
+  background-size: 86px 86px, 132px 132px;
+  opacity: 0.28;
 }
 
 a {
@@ -142,15 +159,32 @@ a {
 
 .section-muted {
   background:
-    linear-gradient(180deg, transparent, color-mix(in srgb, var(--surface-soft) 70%, transparent)),
+    linear-gradient(180deg, transparent, color-mix(in srgb, var(--surface-soft) 56%, transparent)),
     var(--bg);
 }
 
 .hero {
+  position: relative;
   min-height: calc(100vh - 76px);
   display: flex;
   align-items: center;
   overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  right: -180px;
+  top: 50%;
+  width: 520px;
+  height: 520px;
+  border: 1px solid color-mix(in srgb, var(--accent) 48%, transparent);
+  border-radius: 50%;
+  transform: translateY(-50%) rotate(-18deg);
+  box-shadow:
+    inset 0 0 42px rgba(246, 196, 83, 0.08),
+    0 0 80px rgba(141, 216, 255, 0.08);
+  opacity: 0.55;
 }
 
 .hero-grid {
@@ -286,9 +320,11 @@ p {
 
 .profile-panel::before {
   inset: 42px 30px 32px 82px;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--primary) 42%, var(--line));
   border-radius: 32px;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 10%, transparent), transparent 52%);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--primary) 12%, transparent), transparent 52%),
+    repeating-linear-gradient(90deg, transparent 0 18px, rgba(255, 255, 255, 0.035) 18px 19px);
 }
 
 .profile-panel::after {
@@ -311,6 +347,7 @@ p {
   border: 1px solid var(--line);
   border-radius: 32px;
   background:
+    radial-gradient(circle at 50% 50%, rgba(246, 196, 83, 0.10), transparent 38%),
     linear-gradient(145deg, color-mix(in srgb, var(--surface) 86%, transparent), color-mix(in srgb, var(--surface-soft) 90%, transparent)),
     var(--surface);
   box-shadow: var(--shadow);
@@ -387,9 +424,11 @@ p {
 .project-card,
 .timeline-card,
 .education-card {
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--line) 88%, var(--primary));
   border-radius: var(--radius);
-  background: var(--surface);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--surface) 94%, transparent), color-mix(in srgb, var(--surface-soft) 88%, transparent)),
+    var(--surface);
   box-shadow: 0 12px 32px color-mix(in srgb, var(--text) 7%, transparent);
   transition: 0.25s ease;
 }
