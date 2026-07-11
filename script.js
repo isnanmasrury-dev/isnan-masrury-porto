@@ -6,16 +6,19 @@ const navMenu = document.querySelector(".nav-menu");
 const navIcon = navToggle.querySelector("i");
 const year = document.getElementById("year");
 
-const savedTheme = localStorage.getItem("theme");
+const themeVersion = "interstellar-2";
+const savedThemeVersion = localStorage.getItem("themeVersion");
+const savedTheme = savedThemeVersion === themeVersion ? localStorage.getItem("theme") : null;
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 function setTheme(theme) {
   root.dataset.theme = theme;
   localStorage.setItem("theme", theme);
+  localStorage.setItem("themeVersion", themeVersion);
   themeIcon.className = theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
 }
 
-setTheme(savedTheme || (prefersDark ? "dark" : "light"));
+setTheme(savedTheme || "dark");
 year.textContent = new Date().getFullYear();
 
 themeToggle.addEventListener("click", () => {
